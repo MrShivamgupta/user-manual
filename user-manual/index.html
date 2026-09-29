@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>One Click Yatra — User Manual</title>
+<style>
+  :root {
+    --primary: #c7431a;
+    --primary-dark: #a8380f;
+    --accent: #0b7a70;
+    --bg: #f5f7fc;
+    --surface: #ffffff;
+    --border: #e2e5ee;
+    --text: #241c15;
+    --text-secondary: #5c6270;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(20, 20, 40, 0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+  }
+  a { color: var(--primary); }
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+  }
+  nav.toc {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 0 60px;
+  }
+  nav.toc .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 20px 20px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  nav.toc .brand span.plane { color: var(--primary); }
+  nav.toc h4 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin: 20px 20px 6px;
+  }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; }
+  nav.toc li a {
+    display: block;
+    padding: 6px 20px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  nav.toc li a:hover { background: var(--bg); color: var(--primary); }
+  main { padding: 40px 56px 120px; max-width: 980px; }
+  .cover {
+    background: linear-gradient(135deg, var(--primary) 0%, #e08a3f 100%);
+    color: #fff;
+    padding: 48px 40px;
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+  }
+  .cover h1 { margin: 0 0 8px; font-size: 2rem; }
+  .cover p { margin: 0; opacity: 0.92; max-width: 640px; }
+  .area-section { margin-bottom: 64px; }
+  .area-section > h2 {
+    font-size: 1.6rem;
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 10px;
+    margin-bottom: 6px;
+  }
+  .area-section > .area-intro { color: var(--text-secondary); margin-bottom: 28px; max-width: 720px; }
+  .module { margin-bottom: 40px; }
+  .module h3 {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .module p.desc { color: var(--text-secondary); margin: 0 0 14px; max-width: 720px; }
+  .module ol, .module ul { margin: 0 0 14px; padding-left: 22px; }
+  .module ol li, .module ul li { margin-bottom: 4px; }
+  figure.shot {
+    margin: 0 0 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  figure.shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid var(--border);
+  }
+  figure.shot figcaption {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  .shot-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .shot-row { grid-template-columns: 1fr; }
+  }
+  .callout {
+    background: #fff8ee;
+    border: 1px solid #f0d9a8;
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    margin: 0 0 16px;
+  }
+  .callout.tip { background: #eefaf6; border-color: #bfe6da; }
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    color: #fff;
+  }
+  .badge.admin { background: #2563a8; }
+  .badge.public { background: var(--accent); }
+  .badge.customer { background: #7a4fd1; }
+  .badge.vendor { background: var(--primary); }
+  code {
+    background: #f0f1f6;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+  .top-link { font-size: 0.78rem; }
+  footer.page-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 60px;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc">
+    <div class="brand"><span class="plane">&#9992;</span> One Click Yatra</div>
+
+    <h4>Overview</h4>
+    <ul><li><a href="#overview">Introduction</a></li></ul>
+
+    <h4><span class="badge public">Public</span> Website</h4>
+    <ul>
+      <li><a href="#pub-home">Home page</a></li>
+      <li><a href="#pub-destinations">Browsing destinations</a></li>
+      <li><a href="#pub-packages">Searching packages</a></li>
+      <li><a href="#pub-enquiry">Sending an enquiry</a></li>
+      <li><a href="#pub-quote">Viewing a shared quotation</a></li>
+      <li><a href="#pub-currency">Currency converter</a></li>
+      <li><a href="#pub-account">Login &amp; registration</a></li>
+    </ul>
+
+    <h4><span class="badge admin">Admin</span> / Staff CRM</h4>
+    <ul>
+      <li><a href="#adm-dashboard">Dashboard</a></li>
+      <li><a href="#adm-leads">Leads</a></li>
+      <li><a href="#adm-followups">Follow-ups</a></li>
+      <li><a href="#adm-quotations">Quotations</a></li>
+      <li><a href="#adm-bookings">Bookings</a></li>
+      <li><a href="#adm-customers">Customers</a></li>
+      <li><a href="#adm-enquiries">Enquiries</a></li>
+      <li><a href="#adm-vendors">Vendors</a></li>
+      <li><a href="#adm-destinations">Destinations &amp; Master Data</a></li>
+      <li><a href="#adm-packages">Tour Packages</a></li>
+      <li><a href="#adm-payments">Payments &amp; Invoices</a></li>
+      <li><a href="#adm-feedback">Feedback Manager</a></li>
+      <li><a href="#adm-reports">Reports &amp; Analytics</a></li>
+      <li><a href="#adm-users">Users &amp; Roles</a></li>
+      <li><a href="#adm-audit">Audit Logs</a></li>
+      <li><a href="#adm-settings">Settings</a></li>
+    </ul>
+
+    <h4><span class="badge customer">Customer</span> Portal</h4>
+    <ul>
+      <li><a href="#cust-dashboard">Dashboard</a></li>
+      <li><a href="#cust-bookings">My Bookings</a></li>
+      <li><a href="#cust-quotations">My Quotations</a></li>
+      <li><a href="#cust-payments">Payments &amp; Invoices</a></li>
+      <li><a href="#cust-profile">My Profile</a></li>
+    </ul>
+
+    <h4><span class="badge vendor">Vendor</span> Portal</h4>
+    <ul>
+      <li><a href="#ven-dashboard">Dashboard</a></li>
+      <li><a href="#ven-requests">Booking Requests</a></li>
+      <li><a href="#ven-rates">My Rates</a></li>
+      <li><a href="#ven-payments">Payments &amp; Invoices</a></li>
+      <li><a href="#ven-profile">My Profile</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="cover" id="overview">
+      <h1>One Click Yatra — User Manual</h1>
+      <p>A complete walkthrough of every area of the platform: the public marketing website, the internal
+      Admin/Staff CRM, the self-service Customer Portal, and the Vendor Portal. Each section below explains
+      what the screen is for and the steps to do the most common tasks on it, with a real screenshot taken
+      from the running application.</p>
+    </div>
+
+    <p style="color:var(--text-secondary); max-width:720px; margin-top:-20px;">
+      One Click Yatra has four distinct areas, each with its own audience and its own login (or no login at all,
+      for the public site):
+    </p>
+    <ul style="color:var(--text-secondary); max-width:720px;">
+      <li><strong>Public website</strong> &mdash; anyone on the internet: browse destinations and packages,
+        send an enquiry, view a quotation your travel agent shared with you.</li>
+      <li><strong>Admin / Staff CRM</strong> (<code>/admin/...</code>) &mdash; internal staff (SuperAdmin,
+        Travel Agent, Operations, Finance) manage leads, quotations, bookings, vendors, payments and reports.</li>
+      <li><strong>Customer Portal</strong> (<code>/portal/...</code>) &mdash; a registered customer's
+        self-service area: their own bookings, quotations, payments and invoices.</li>
+      <li><strong>Vendor Portal</strong> (<code>/vendor-portal/...</code>) &mdash; a hotel/transport/activity
+        vendor's self-service area: their own rates, payments and invoice submissions.</li>
+    </ul>
+
+    <!-- ================= PUBLIC WEBSITE ================= -->
+    <section class="area-section" id="public-website">
+      <h2><span class="badge public">Public</span> Website</h2>
+      <p class="area-intro">The public site is what every visitor sees before logging in. No account is
+        required to browse destinations, search packages, convert prices to their own currency, or send an
+        enquiry.</p>
+
+      <div class="module" id="pub-home">
+        <h3>Home page</h3>
+        <p class="desc">The landing page: a destination/date/traveler search bar, popular destinations,
+          featured packages, a trust section, and real customer testimonials.</p>
+        <figure class="shot">
+          <img src="img/public-home.png" alt="Public home page" />
+          <figcaption>Home page — hero search, popular destinations, featured packages, trust section and testimonials.</figcaption>
+        </figure>
+        <ol>
+          <li>Fill in a destination, travel dates and number of travelers in the hero search bar, then click
+            <strong>Search</strong> to jump to matching packages.</li>
+          <li>Click <strong>View all</strong> above "Popular Destinations" or "Featured Packages" to see the
+            full lists.</li>
+          <li>Scroll down to see why customers choose One Click Yatra and read real traveler feedback.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="pub-destinations">
+        <h3>Browsing destinations</h3>
+        <p class="desc">The destinations list shows every published destination as a card, plus an
+          "at a glance" world map that groups destinations by country.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/public-destinations-list.png" alt="Destinations list with map" />
+            <figcaption>Destinations list — search box, destination cards, and the country overview map.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/public-destination-detail.png" alt="Destination detail page" />
+            <figcaption>Destination detail — description, photo gallery and a real explorable map pin.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Type in the search box to filter destinations by name.</li>
+          <li>On the map, click a numbered green badge to fly out dashed lines to every destination inside
+            that country (click the same badge again to collapse them) — this also filters the grid above to
+            that country.</li>
+          <li>Click any destination card to open its detail page, which shows a real street map pin for its
+            exact location plus a photo gallery and package suggestions.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="pub-packages">
+        <h3>Searching &amp; viewing packages</h3>
+        <p class="desc">Search all published tour packages by destination, duration or price, then open one
+          to see its full itinerary, inclusions/exclusions and pricing.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/public-package-search.png" alt="Package search page" />
+            <figcaption>Package search — filter by destination, price and duration.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/public-package-detail.png" alt="Package detail page" />
+            <figcaption>Package detail — gallery, itinerary, inclusions and starting price.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Use the filters at the top of the search page to narrow by destination, category or budget.</li>
+          <li>Click a package card to view full day-by-day details, then use <strong>Enquire Now</strong> to
+            ask about that specific package.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="pub-enquiry">
+        <h3>Sending an enquiry</h3>
+        <p class="desc">Anyone can submit a travel enquiry without an account. It lands directly in the
+          Admin CRM's Enquiries queue for staff to follow up on.</p>
+        <figure class="shot">
+          <img src="img/public-enquiry-form.png" alt="Public enquiry form" />
+          <figcaption>Enquiry form — name, contact details, destination interest and message.</figcaption>
+        </figure>
+        <ol>
+          <li>Fill in your name, phone/email and a short message describing your trip.</li>
+          <li>Submit — a staff member will see it immediately under <a href="#adm-enquiries">Admin &rarr; Enquiries</a>.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="pub-quote">
+        <h3>Viewing a shared quotation</h3>
+        <p class="desc">When a staff member sends a quotation, the customer receives a secure link (no login
+          needed) showing every priced package option side by side.</p>
+        <figure class="shot">
+          <img src="img/public-quote-view.png" alt="Public shared quotation view" />
+          <figcaption>Shared quotation — priced options with inclusions, ready to approve or decline.</figcaption>
+        </figure>
+        <ol>
+          <li>Open the link shared by your travel agent (by email or WhatsApp).</li>
+          <li>Compare the options' price breakdowns, then click <strong>Approve a Package</strong> to accept
+            one, or <strong>Decline</strong>.</li>
+          <li>Use <strong>Download as PDF</strong> to save a copy of the quotation.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="pub-currency">
+        <h3>Currency converter</h3>
+        <p class="desc">Every listed price is in INR by default. Visitors browsing from abroad can switch the
+          currency shown next to each price using the switcher in the header.</p>
+        <figure class="shot">
+          <img src="img/public-currency-converted.png" alt="Currency switcher showing converted prices" />
+          <figcaption>Currency switcher — prices show a live-converted approximate amount next to the INR price.</figcaption>
+        </figure>
+        <ol>
+          <li>Open the currency dropdown in the top-right of any public page (next to Login/Register).</li>
+          <li>Pick a currency (USD, EUR, GBP, AUD, CAD, SGD, AED or JPY) — every price on the site now shows an
+            "&asymp; converted amount" next to the original INR price, using live exchange rates.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="pub-account">
+        <h3>Login &amp; registration</h3>
+        <p class="desc">Customers and staff both sign in from the same login screen; new customers can
+          self-register for a Customer Portal account.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/auth-login.png" alt="Login page" />
+            <figcaption>Login page — used by staff, customers and vendors alike.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/auth-register.png" alt="Registration page" />
+            <figcaption>Customer self-registration — creates a Customer Portal account.</figcaption>
+          </figure>
+        </div>
+        <p class="desc">After logging in, you're taken straight to your own dashboard: staff go to the Admin
+          CRM, customers go to the Customer Portal, and vendors go to the Vendor Portal.</p>
+      </div>
+    </section>
+
+    <!-- ================= ADMIN / STAFF CRM ================= -->
+    <section class="area-section" id="admin-crm">
+      <h2><span class="badge admin">Admin</span> / Staff CRM</h2>
+      <p class="area-intro">The internal back office at <code>/admin</code>. What a staff member can see and
+        do here depends on their role (SuperAdmin, Travel Agent, Operations, Finance) — every menu item and
+        action button is permission-gated, so a user simply won't see sections they don't have access to.</p>
+
+      <div class="module" id="adm-dashboard">
+        <h3>Dashboard</h3>
+        <p class="desc">The first screen after logging in: today's key numbers, revenue and conversion
+          charts, and quick-action shortcuts for the most common daily tasks.</p>
+        <figure class="shot">
+          <img src="img/admin-dashboard.png" alt="Admin dashboard" />
+          <figcaption>Dashboard — KPI tiles, revenue/conversion charts, quick actions, and recent activity feeds.</figcaption>
+        </figure>
+        <ul>
+          <li>Use the <strong>+ Quick Action</strong> button (or the colored tiles below the KPIs) to jump
+            straight into creating a lead, quotation, booking or customer.</li>
+          <li>Overdue follow-up and expiring-quotation banners at the top link straight to the records that
+            need attention.</li>
+        </ul>
+      </div>
+
+      <div class="module" id="adm-leads">
+        <h3>Leads</h3>
+        <p class="desc">Every prospective customer starts as a Lead — captured manually, from a public
+          enquiry, or from WhatsApp.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-leads-list.png" alt="Leads list" />
+            <figcaption>Leads list — filter by status, source or assigned agent.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-lead-detail.png" alt="Lead detail page" />
+            <figcaption>Lead detail — contact info, status, notes, follow-ups and the option to create a quotation.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Click <strong>+ New Lead</strong> on the list page, fill in the customer's contact details,
+            budget and travel interest, and save.</li>
+          <li>Open a lead to update its status as it progresses (New &rarr; Contacted &rarr; Quotation Sent
+            &rarr; Negotiation &rarr; Confirmed/Lost), log follow-up notes, or assign it to another agent.</li>
+          <li>From the lead detail page, click <strong>Create Quotation</strong> to start pricing options for
+            that customer.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="adm-followups">
+        <h3>Follow-ups</h3>
+        <p class="desc">A unified queue of every scheduled follow-up call/message across all leads, so no
+          prospect is forgotten.</p>
+        <figure class="shot">
+          <img src="img/admin-followups.png" alt="Follow-ups queue" />
+          <figcaption>Follow-ups — due today, overdue and upcoming, across every lead.</figcaption>
+        </figure>
+        <ol>
+          <li>Mark a follow-up as done once you've made the call, or reschedule it to a later date.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="adm-quotations">
+        <h3>Quotations</h3>
+        <p class="desc">Build one or more priced package options for a lead, then send a secure link the
+          customer can review and approve without logging in.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-quotations-list.png" alt="Quotations list" />
+            <figcaption>Quotations list — status of every quotation sent (Draft, Sent, Approved, Rejected).</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-quotation-detail.png" alt="Quotation detail with options" />
+            <figcaption>Quotation detail — multiple priced options with a full cost breakdown per option.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Open a quotation and click <strong>+ Add Option</strong> to add a priced package (duration,
+            hotel category, price per person, and an itemized cost breakdown).</li>
+          <li>Mark your best option as <strong>Recommended</strong> — it's highlighted for the customer.</li>
+          <li>Click <strong>Generate Share Link</strong> to get the secure customer-facing URL, or
+            <strong>Download PDF</strong> for an offline copy.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="adm-bookings">
+        <h3>Bookings</h3>
+        <p class="desc">Once a customer approves a quotation (or staff creates one directly), it becomes a
+          Booking that moves through a fixed status pipeline to Confirmed and beyond.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-bookings-list.png" alt="Bookings list" />
+            <figcaption>Bookings list — filter by status, destination or travel date.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-booking-detail.png" alt="Booking detail page" />
+            <figcaption>Booking detail — passengers, add-ons, payment status and voucher generation.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Add every traveler under <strong>Passengers</strong> (name, age, ID proof) — the lead passenger
+            is flagged.</li>
+          <li>Add optional extras (airport transfer, travel insurance, etc.) under <strong>Add-Ons</strong>.</li>
+          <li>Move the booking through its status: Draft &rarr; Quoted &rarr; Pending Payment &rarr;
+            Confirmed. Once Confirmed, a travel voucher can be generated for the customer.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="adm-customers">
+        <h3>Customers</h3>
+        <p class="desc">Every person who has booked or registered becomes a Customer record, with their full
+          booking and payment history in one place.</p>
+        <figure class="shot">
+          <img src="img/admin-customers.png" alt="Customers list" />
+          <figcaption>Customers — searchable directory with each customer's booking history.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="adm-enquiries">
+        <h3>Enquiries</h3>
+        <p class="desc">Every enquiry submitted on the public website lands here for a staff member to
+          triage and convert into a lead.</p>
+        <figure class="shot">
+          <img src="img/admin-enquiries.png" alt="Enquiries admin list" />
+          <figcaption>Enquiries — respond to and convert public-website enquiries into leads.</figcaption>
+        </figure>
+        <ol>
+          <li>Change an enquiry's status as you work it (New &rarr; In Progress &rarr; Converted/Closed).</li>
+          <li>Use <strong>Convert to Lead</strong> once you're ready to start pricing options for them.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="adm-vendors">
+        <h3>Vendors</h3>
+        <p class="desc">Hotels, transport operators and activity providers your agency works with. Each
+          vendor can optionally be given their own login to the <a href="#vendor-portal">Vendor Portal</a>.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-vendors-list.png" alt="Vendors list" />
+            <figcaption>Vendors list — hotels, transport and activity providers.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-vendor-detail.png" alt="Vendor detail page" />
+            <figcaption>Vendor detail — contact info, rate card, and payment history.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Click <strong>+ New Vendor</strong>, fill in their business and contact details, and save.</li>
+          <li>Under the vendor's <strong>Rates</strong> tab, add each service they offer with its price.</li>
+          <li>Record payments made to the vendor under the <strong>Payments</strong> tab as they fall due.</li>
+        </ol>
+        <div class="callout">
+          A vendor only gets portal access once a staff member links a user account to their vendor record.
+        </div>
+      </div>
+
+      <div class="module" id="adm-destinations">
+        <h3>Destinations &amp; Master Data</h3>
+        <p class="desc">The catalog data that powers the public site: destinations (with map coordinates),
+          plus shared lookup lists like package categories and travel seasons.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-destinations.png" alt="Admin destinations management" />
+            <figcaption>Destinations — name, country, description, gallery and map coordinates.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-master-data.png" alt="Master data management" />
+            <figcaption>Master Data — package categories, seasons and other shared lookup lists.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>When adding or editing a destination, set its <strong>Latitude</strong>/<strong>Longitude</strong>
+            fields so it appears correctly pinned on the public destination map.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="adm-packages">
+        <h3>Tour Packages</h3>
+        <p class="desc">The pre-built packages customers browse and book on the public site — itinerary,
+          pricing, gallery and publish status.</p>
+        <figure class="shot">
+          <img src="img/admin-packages-list.png" alt="Packages list" />
+          <figcaption>Tour Packages — manage every package's itinerary, pricing and publish status.</figcaption>
+        </figure>
+        <ol>
+          <li>Set a package's status to <strong>Published</strong> once it's ready to appear on the public site.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="adm-payments">
+        <h3>Payments &amp; Invoices</h3>
+        <p class="desc">Every payment collected against a booking, and every invoice generated for a
+          customer.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-payments.png" alt="Payments list" />
+            <figcaption>Payments — record and track every payment against a booking.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-invoices.png" alt="Invoices list" />
+            <figcaption>Invoices — generate and download customer-facing invoices.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="module" id="adm-feedback">
+        <h3>Feedback Manager</h3>
+        <p class="desc">Customer feedback submitted after a trip. High-rated feedback with a comment can be
+          featured as a public testimonial on the Home page.</p>
+        <figure class="shot">
+          <img src="img/admin-feedback.png" alt="Feedback manager" />
+          <figcaption>Feedback Manager — review post-trip ratings and comments.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="adm-reports">
+        <h3>Reports &amp; Analytics</h3>
+        <p class="desc">Pre-built reports for sales, revenue and team performance, exportable for further
+          analysis.</p>
+        <figure class="shot">
+          <img src="img/admin-reports-hub.png" alt="Reports hub" />
+          <figcaption>Reports hub — pick a report to view detailed charts and data tables.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="adm-users">
+        <h3>Users &amp; Roles</h3>
+        <p class="desc">Manage staff accounts and what each role is allowed to do, via a fine-grained
+          permission matrix.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-users.png" alt="Users management" />
+            <figcaption>Users — create staff accounts and assign them a role.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-roles.png" alt="Roles and permissions" />
+            <figcaption>Roles — see exactly which permissions each role grants.</figcaption>
+          </figure>
+        </div>
+        <p class="desc">Only a <strong>SuperAdmin</strong> can access this section.</p>
+      </div>
+
+      <div class="module" id="adm-audit">
+        <h3>Audit Logs</h3>
+        <p class="desc">A read-only trail of who changed what and when, across the whole CRM — useful for
+          troubleshooting and compliance.</p>
+        <figure class="shot">
+          <img src="img/admin-audit-logs.png" alt="Audit logs" />
+          <figcaption>Audit Logs — every create/update/delete action, with the user and timestamp.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="adm-settings">
+        <h3>Settings</h3>
+        <p class="desc">Agency-wide configuration: your company's branding (used on every PDF), the email
+          templates sent to customers, and the status of connected integrations.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/admin-settings-agency-profile.png" alt="Agency profile settings" />
+            <figcaption>Agency Profile — company name, logo and address, used on invoices, quotations and vouchers.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/admin-settings-email-templates.png" alt="Email templates settings" />
+            <figcaption>Email Templates — customize the wording of automated customer emails.</figcaption>
+          </figure>
+        </div>
+        <figure class="shot">
+          <img src="img/admin-settings-integrations.png" alt="Integration status settings" />
+          <figcaption>Integration Status — see which external services (email, WhatsApp, payments) are configured and healthy.</figcaption>
+        </figure>
+        <ol>
+          <li>Update your agency's name, logo and contact details under <strong>Agency Profile</strong> —
+            this branding automatically appears on every PDF (invoices, quotations, vouchers).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= CUSTOMER PORTAL ================= -->
+    <section class="area-section" id="customer-portal">
+      <h2><span class="badge customer">Customer</span> Portal</h2>
+      <p class="area-intro">Once a customer registers or is booked by staff, they can log in at
+        <code>/portal</code> to self-serve: track their bookings, review quotations, and manage payments
+        without calling the agency.</p>
+
+      <div class="module" id="cust-dashboard">
+        <h3>Dashboard</h3>
+        <p class="desc">A quick summary of the customer's own bookings and account, with shortcuts to every
+          section of the portal.</p>
+        <figure class="shot">
+          <img src="img/customer-portal-dashboard.png" alt="Customer portal dashboard" />
+          <figcaption>Customer dashboard — a snapshot of upcoming trips and quick links.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="cust-bookings">
+        <h3>My Bookings</h3>
+        <p class="desc">Every trip the customer has booked, with full trip details, passengers, add-ons, and
+          a downloadable travel voucher once confirmed.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/customer-portal-bookings-list.png" alt="Customer bookings list" />
+            <figcaption>My Bookings — every trip, past and upcoming.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/customer-portal-booking-detail.png" alt="Customer booking detail" />
+            <figcaption>Booking detail — passengers, add-ons, travel voucher download and document upload.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Open a confirmed booking and click <strong>Download Voucher</strong> to get the travel voucher
+            PDF for check-in.</li>
+          <li>Upload any requested documents (ID proof, visa, etc.) directly from the booking detail page.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="cust-quotations">
+        <h3>My Quotations</h3>
+        <p class="desc">Quotations a travel agent has sent, viewable here in addition to the emailed link —
+          approve or decline directly from the portal.</p>
+        <figure class="shot">
+          <img src="img/customer-portal-quotations.png" alt="Customer quotations" />
+          <figcaption>My Quotations — every quotation sent to this customer.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="cust-payments">
+        <h3>Payments &amp; Invoices</h3>
+        <p class="desc">A full record of what's been paid and what invoices have been issued for each
+          booking.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/customer-portal-payments.png" alt="Customer payments" />
+            <figcaption>My Payments — payment history across all bookings.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/customer-portal-invoices.png" alt="Customer invoices" />
+            <figcaption>My Invoices — download any invoice issued to this account.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="module" id="cust-profile">
+        <h3>My Profile</h3>
+        <p class="desc">Update contact details and password.</p>
+        <figure class="shot">
+          <img src="img/customer-portal-profile.png" alt="Customer profile" />
+          <figcaption>My Profile — name, contact details and password.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= VENDOR PORTAL ================= -->
+    <section class="area-section" id="vendor-portal">
+      <h2><span class="badge vendor">Vendor</span> Portal</h2>
+      <p class="area-intro">A vendor (hotel, transport operator, activity provider) that has been linked to a
+        login by staff can sign in at <code>/vendor-portal</code> to manage their own rates, see booking
+        requests relevant to them, and submit invoices for payment.</p>
+
+      <div class="module" id="ven-dashboard">
+        <h3>Dashboard</h3>
+        <p class="desc">A quick summary of the vendor's own profile and shortcuts to every section.</p>
+        <figure class="shot">
+          <img src="img/vendor-portal-dashboard.png" alt="Vendor portal dashboard" />
+          <figcaption>Vendor dashboard — profile summary and quick links.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="ven-requests">
+        <h3>Booking Requests</h3>
+        <p class="desc">Bookings relevant to this vendor's destination(s), so they know what's coming up.</p>
+        <figure class="shot">
+          <img src="img/vendor-portal-booking-requests.png" alt="Vendor booking requests" />
+          <figcaption>Booking Requests — upcoming bookings this vendor may need to service.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="ven-rates">
+        <h3>My Rates</h3>
+        <p class="desc">The vendor's own published price list for the services they offer (room rates,
+          transfer prices, etc.) — kept in sync with what staff see on the Admin side.</p>
+        <figure class="shot">
+          <img src="img/vendor-portal-rates.png" alt="Vendor rates" />
+          <figcaption>My Rates — the vendor's own service rate card.</figcaption>
+        </figure>
+      </div>
+
+      <div class="module" id="ven-payments">
+        <h3>Payments &amp; Invoices</h3>
+        <p class="desc">Track what the agency owes and has paid, and submit new invoices for work completed.</p>
+        <div class="shot-row">
+          <figure class="shot">
+            <img src="img/vendor-portal-payments.png" alt="Vendor payments" />
+            <figcaption>Payments — amounts paid and pending from the agency.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/vendor-portal-invoices.png" alt="Vendor invoices" />
+            <figcaption>Invoices — upload a new invoice for a completed service.</figcaption>
+          </figure>
+        </div>
+        <ol>
+          <li>Click <strong>+ Submit Invoice</strong>, attach the invoice file, enter the amount, and submit
+            it for the agency's finance team to review.</li>
+        </ol>
+      </div>
+
+      <div class="module" id="ven-profile">
+        <h3>My Profile</h3>
+        <p class="desc">Update the vendor's own business contact details.</p>
+        <figure class="shot">
+          <img src="img/vendor-portal-profile.png" alt="Vendor profile" />
+          <figcaption>My Profile — business name, contact person and details.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      One Click Yatra &mdash; internal user manual. Screenshots reflect the application as of September 2026.
+    </footer>
+  </main>
+</div>
+</body>
+</html>
